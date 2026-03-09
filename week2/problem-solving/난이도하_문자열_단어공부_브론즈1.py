@@ -36,15 +36,15 @@
 
 
 
-# string = "Mississipi"
-# temp = []
-# while len(string) == 0:
-#     count = 0
-#     for i in range(len(string)):
-#         if string[0] == string[i]:
-#             count = count + 1
-#     temp.append({string[0]:count})
-#     string.replace(string[0], "")
+string = "Mississipi"
+string.upper()
+temp = []
+for x in string:
+    temp.append(x)
 
-# print(temp)
+temp.remove
+
+string.count()
+
+print(temp)
     

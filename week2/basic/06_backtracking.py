@@ -44,6 +44,10 @@ def combinations(n, k):
             current_combination: 현재까지 선택한 숫자들
         """
         # TODO: base case - k개를 모두 선택했으면 결과에 추가
+        count = len(current_combination)
+        if count == k:
+            result.append(current_combination)
+
         pass
         
         # TODO: start부터 n까지 숫자를 하나씩 시도
@@ -51,6 +55,13 @@ def combinations(n, k):
         ## 1. 선택(Choose)
         ## 2. 탐색(Explore)
         ## 3. 취소(Unchoose)
+
+
+        if n <= start + len(current_combination): # 취소
+            return
+
+        return backtrack(start+1, []) # 탐색
+
         pass
     
     backtrack(1, [])
