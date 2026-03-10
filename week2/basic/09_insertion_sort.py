@@ -85,15 +85,6 @@ def insertion_sort(arr):
 """
 과정을 출력하는 삽입 정렬
 """
-
-
-
-
-
-
-
-
-
 def insertion_sort_with_steps(arr):
     n = len(arr)
     print(f"초기 배열: {arr}")
