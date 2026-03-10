@@ -95,32 +95,26 @@ n을 옮기기 위해서 n-1 원판을 정렬 해야됨
 
 
 # hanoi(int(input()), 1, 3)
+'''
+원판 이동
+1 -> 2 
+1 -> 3
+2 -> 1
+2 -> 3
+1 -> 2
+1 -> 3
+
+'''
 
 
-
-def hanoi(n, now, target):
-    
-    if n == 1:
+def hanoi(n, now, target, temp):
+    if n == 1: # 마지막 1번 원판: 현재 -> 타겟
+        print(now, target)
         return
-    hanoi(n-1, now, target)
-    now, target = move(now, target)
-    
-
-
-def move(now, target):
-    empty = 6-now-target
-    print(now, empty)
-    print(now, target)
-    print(empty, target)
-    print(now, empty)
-
-    temp = now
-    now = target
-    target = empty
-    empty = temp
-
-    return now, target
+    hanoi(n-1, now, temp, target) # n-1개 원판 현재 -> temp로
+    hanoi(n-1, temp, target, now) # n-2 원판 temp -> 
 
 
 
-hanoi(int(input()), 1, 3)
+
+hanoi(int(input()), 1, 3, 2)

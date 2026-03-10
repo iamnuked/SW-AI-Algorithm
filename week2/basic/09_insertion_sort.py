@@ -77,36 +77,60 @@ def insertion_sort(arr):
             curr -= 1
         arr[curr] = temp
 
-
-
-    
-
-
-    pass
-    
     return arr
 
+
+
+
+"""
+과정을 출력하는 삽입 정렬
+"""
+
+
+
+
+
+
+
+
+
 def insertion_sort_with_steps(arr):
-    """
-    과정을 출력하는 삽입 정렬
-    """
     n = len(arr)
     print(f"초기 배열: {arr}")
     
     for i in range(1, n):
         key = arr[i]
-        j = i - 1
-        
+        j = i - 1 # 이전
+
         print(f"\nStep {i}: key = {key}")
         print(f"정렬된 부분: {arr[:i]}")
-        
+
         # TODO: 삽입 위치 찾기 및 이동
+        while i > 0 and key < arr[j]:
+            arr[i] = arr[j]
+            i -= 1
+            j -= 1
         pass
         
-        arr[j + 1] = key
+        arr[i] = key
         print(f"삽입 후: {arr}")
     
     return arr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 테스트 케이스
 if __name__ == "__main__":

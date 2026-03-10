@@ -30,29 +30,52 @@ Args:
     k: 선택할 개수
 
 """
+
+# dfs 방식
+# def combinations(n, k):
+#     result = []
+    
+#     def select(start, current_combination):
+#         curr_list = current_combination.copy()
+#         curr_list.append(start) # 추가
+
+#         if len(curr_list) == k: # TODO: base case - k개를 모두 선택했으면 결과에 추가
+#             result.append(curr_list)
+#             return
+
+#         if start + k - len(curr_list) > n: # 취소: 더이상 진행 x
+#             return
+        
+    
+#         for i in range(start+1, n+1):
+#             select(i, curr_list)
+
+
+
+#     for i in range(1, n+1):
+#         select(i, [])
+#     return result
+
+# back 방식 -> append, pop 방식으로
 def combinations(n, k):
     result = []
-    
-    def select(start, current_combination):
-        curr_list = current_combination.copy()
-        curr_list.append(start) # 추가
+    def back(start, current_combination):
+        # base case
+        if len(current_combination) == k:
+            result.append(current_combination)
 
-        if len(curr_list) == k: # TODO: base case - k개를 모두 선택했으면 결과에 추가
-            result.append(curr_list)
-            return
-
-        if start + k - len(curr_list) > n: # 취소: 더이상 진행 x
-            return
-        
-    
-        for i in range(start+1, n+1):
-            select(i, curr_list)
-
-    
+        #선택
         
 
-    for i in range(1, n+1):
-        select(i, [])
+        #탐색
+
+        #취소
+
+
+        return
+
+
+    back(1, [])
     return result
 
 
