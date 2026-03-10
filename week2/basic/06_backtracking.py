@@ -22,50 +22,42 @@
 - 현재 숫자보다 큰 숫자만 선택하여 중복 방지
 """
 
+"""
+1부터 n까지 숫자 중 k개를 선택하는 모든 조합 찾기
+
+Args:
+    n: 전체 숫자 개수
+    k: 선택할 개수
+
+"""
 def combinations(n, k):
-    """
-    1부터 n까지 숫자 중 k개를 선택하는 모든 조합 찾기
-    
-    Args:
-        n: 전체 숫자 개수
-        k: 선택할 개수
-    
-    Returns:
-        모든 조합의 리스트
-    """
     result = []
     
-    def backtrack(start, current_combination):
-        """
-        백트랙킹 헬퍼 함수
-        
-        Args:
-            start: 탐색을 시작할 숫자
-            current_combination: 현재까지 선택한 숫자들
-        """
-        # TODO: base case - k개를 모두 선택했으면 결과에 추가
-        count = len(current_combination)
-        if count == k:
-            result.append(current_combination)
+    def select(start, current_combination):
+        curr_list = current_combination.copy()
+        curr_list.append(start) # 추가
 
-        pass
-        
-        # TODO: start부터 n까지 숫자를 하나씩 시도
-        ## TODO: 백트랙킹 3단계 구현
-        ## 1. 선택(Choose)
-        ## 2. 탐색(Explore)
-        ## 3. 취소(Unchoose)
-
-
-        if n <= start + len(current_combination): # 취소
+        if len(curr_list) == k: # TODO: base case - k개를 모두 선택했으면 결과에 추가
+            result.append(curr_list)
             return
 
-        return backtrack(start+1, []) # 탐색
-
-        pass
+        if start + k - len(curr_list) > n: # 취소: 더이상 진행 x
+            return
+        
     
-    backtrack(1, [])
+        for i in range(start+1, n+1):
+            select(i, curr_list)
+
+    
+        
+
+    for i in range(1, n+1):
+        select(i, [])
     return result
+
+
+
+
 
 def combinations_itertools_compare(n, k):
     """

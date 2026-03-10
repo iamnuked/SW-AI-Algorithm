@@ -24,6 +24,8 @@
 - LCM 공식: lcm(a, b) = (a × b) / gcd(a, b)
 """
 
+import math
+
 def gcd(a, b):
     """
     유클리드 호제법을 사용한 최대공약수 계산
@@ -37,6 +39,14 @@ def gcd(a, b):
     # TODO: 유클리드 호제법 구현
     # base case: b가 0이면 a 반환
     # recursive를 이용 
+
+    ## 첫 번째 인수가 더 커야됨
+    if b == 0: # 최대공약수
+        return a
+
+    return gcd(b, a % b)
+
+
     pass
 
 def gcd_iterative(a, b):
@@ -51,6 +61,13 @@ def gcd_iterative(a, b):
     """
     # TODO: 반복문으로 구현
     # b가 0이 될 때까지 반복
+    while b != 0:
+        temp = b
+        b = a % b
+        a = temp
+
+    return a
+
     pass
 
 def lcm(a, b):
@@ -64,6 +81,9 @@ def lcm(a, b):
         최소공배수
     """
     # TODO: LCM 계산
+    gcd_result = gcd(a, b)
+    return a * b / gcd_result
+
     pass
 
 def extended_gcd(a, b):
@@ -81,6 +101,11 @@ def extended_gcd(a, b):
     # base case: b가 0이면 (a, 1, 0) 반환    
     # recursive case
     # 역추적하며 x, y 계산
+    if b == 0:
+        return (a, 1, 0) # 최대공약수
+    
+
+
     pass
 
 def is_prime(n):
@@ -97,6 +122,18 @@ def is_prime(n):
     # n이 2보다 작으면 False
     # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
     # 3부터 sqrt(n)까지 홀수만 확인
+
+    '''
+    소수 조건 -> 1 이외 자기자신만 약수를 가지는 수, 1, 2는 제외
+     
+    '''
+    if n < 2:
+        return False
+    
+    for i in range(2, int(math.sqrt(n))+1):
+        if n % i == 0:
+            return False
+    return True
     pass 
 
 # 테스트 케이스
