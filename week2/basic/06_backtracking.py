@@ -56,21 +56,30 @@ Args:
 #         select(i, [])
 #     return result
 
+
+
+
+
+
+
+
 # back 방식 -> append, pop 방식으로
 def combinations(n, k):
     result = []
-    def back(start, current_combination):
-        # base case
-        if len(current_combination) == k:
-            result.append(current_combination)
 
-        #선택
+    def back(start, current_combination):
+        if len(current_combination) == k:
+            result.append(current_combination.copy())
+            return
         
 
-        #탐색
-
-        #취소
-
+        for i in range(start, n+1):
+            if n < i + len(current_combination) - k:
+                return
+        
+            current_combination.append(i)
+            back(i+1, current_combination)  
+            current_combination.pop()
 
         return
 

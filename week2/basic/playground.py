@@ -26,25 +26,3 @@
 '''
 
 
-
-class Solution:
-    def myPow(self, x: float, n: int) -> float:
-        result = float(1)
-        if n > 0:
-            while n == 0:
-                n % 2
-
-            return result
-        elif n < 0:
-            for _ in range(-n):
-                result = result / x
-            return result
-        elif n == 0:
-            return 1
-        
-
-print(Solution.myPow("", 3, -1))
-
-print(1/3)
-
-
