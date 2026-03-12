@@ -36,15 +36,34 @@
 
 
 
-string = "Mississipi"
-string.upper()
-temp = []
-for x in string:
-    temp.append(x)
+string = input()
+string = string.upper()
+ch_list = []
 
-temp.remove
+for i in string:
+    ch_list.append(i)
 
-string.count()
+ch = set()
+for i in string:
+    ch.add(i)
 
-print(temp)
-    
+ch = list(ch)
+
+
+
+ch_count = []
+for i in ch:
+    ch_count.append(ch_list.count(i))
+
+max_count = max(ch_count)
+
+
+idx = [i for i, v in enumerate(ch_count) if v == max_count]
+
+
+if len(idx) > 1:
+    print("?")
+else:
+    print(ch[idx[0]])
+
+
