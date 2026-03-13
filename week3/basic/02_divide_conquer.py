@@ -23,6 +23,12 @@
 - 왼쪽과 오른쪽의 최댓값 중 큰 값 반환
 """
 
+'''
+의문점 최대값 구하는데 왜 분할 정복을 사용하는 거지? -> 분할 정복은 공간 복잡도, 시간 복잡도 모두 높지 않나? 그냥 탐색해서 가지고 오면 안되나?
+ㄴ gpt의 답변 -> 맞음 그냥 분할 정복 개념 학습용으로 집어넣었음
+'''
+
+
 def find_max_divide_conquer(arr, left, right):
     """
     분할 정복으로 최댓값 찾기
@@ -36,19 +42,19 @@ def find_max_divide_conquer(arr, left, right):
         최댓값
     """
     # TODO: base case - 원소가 하나면 그 값 반환
-    pass
+    if left == right:
+        return arr[left] # 디버깅용 -> 
     
     # TODO: 중간 지점 계산
-    pass
-    
+    mid = (left + right) // 2
+
     # TODO: 왼쪽 절반의 최댓값
-    pass
-        
+    max_left = find_max_divide_conquer(arr, left, mid)
     # TODO: 오른쪽 절반의 최댓값
-    pass
+    max_right = find_max_divide_conquer(arr, mid+1, right)
     
     # TODO: 둘 중 큰 값 반환
-    pass
+    return max(max_left, max_right)
 
 # 테스트 케이스
 if __name__ == "__main__":
