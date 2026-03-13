@@ -30,7 +30,7 @@ class Node:
 
 class LinkedList:
     """단순 연결 리스트"""
-    def __init__(self):
+    def __init__(self): # 헤드 포인터
         self.head = None
     
     def append(self, data):
@@ -38,9 +38,19 @@ class LinkedList:
         new_node = Node(data)
         
         # TODO: 리스트가 비어있으면 head를 new_node로 설정
-        pass
-        
+        if self.head == None:
+            self.head = new_node
+            return
+        pass        
+
         # TODO: 마지막 노드 찾기
+        pointer = self.head
+        while True:
+            if pointer.next == None:
+                pointer.next = new_node
+                return
+            pointer = pointer.next
+        
         pass
         
         # TODO: 마지막 노드의 next를 new_node로 설정
@@ -49,14 +59,25 @@ class LinkedList:
     def print_list(self):
         """리스트의 모든 값 출력"""
         values = []
+        pointer = self.head
         
         # TODO: head부터 시작
+        while pointer != None:
+            if pointer == None:
+                return
+            values.append(pointer.data)
+            pointer = pointer.next
         pass
         
         # TODO: 끝까지 순회하며 값 수집
         pass
         
         return values
+    
+
+
+
+
 
 # 테스트 케이스
 if __name__ == "__main__":
