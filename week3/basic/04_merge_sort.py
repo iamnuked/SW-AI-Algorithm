@@ -22,90 +22,65 @@
 - 정렬된 두 부분을 병합
 """
 
+
+
+
+
+# 두 개의 정렬된 부분 배열을 병합하는 함수
+# arr: 원본 배열 left: 왼쪽 부분의 시작 인덱스 mid: 왼쪽 부분의 끝 인덱스 right: 오른쪽 부분의 끝 인덱스
 def merge(arr, left, mid, right):
-    """
-    두 개의 정렬된 부분 배열을 병합하는 함수
-    
-    Args:
-        arr: 원본 배열
-        left: 왼쪽 부분의 시작 인덱스
-        mid: 왼쪽 부분의 끝 인덱스
-        right: 오른쪽 부분의 끝 인덱스
-    """
-    # TODO: 왼쪽과 오른쪽 부분 배열을 임시 배열로 복사
+    l_arr = arr[left:mid+1]
+    r_arr = arr[mid+1:right+1]
+    lp = 0
+    rp = 0
+    k = left
+    le = len(l_arr)
+    re = len(r_arr)
 
-    arr_left = arr[left:mid]
-    arr_right = arr[mid:right+1]
+    while lp < le and rp < re:
+        if l_arr[lp] <= r_arr[rp]:
+            arr[k] = l_arr[lp]
+            lp += 1
+        else:
+            arr[k] = r_arr[rp]
+            rp += 1
+        k += 1
 
-    pass
-    
-    # TODO: 두 배열을 병합
-    pass
-    
-    
-    # TODO: left_arr와 right_arr를 비교하며 작은 값을 arr에 복사
-    temp_arr = []
+    while lp < le:
+        arr[k] = l_arr[lp]
+        k += 1
+        lp += 1
 
-    for x in arr_left:
-        for y in arr_right:
-            if x <= y:
-                temp_arr.append(x)
-            else:
-                temp_arr.append(y)
+    while rp < re:
+        arr[k] = r_arr[rp]
+        k += 1
+        rp += 1
 
-    pass
-    
-    # TODO: 남은 원소들을 복사
-    # left_arr에 남은 원소가 있으면 복사
-    # right_arr에 남은 원소가 있으면 복사
-    pass
 
-    return
 
+
+# 머지 정렬 재귀 함수
+# arr: 배열, left: 시작 인덱스, right: 끝 인덱스
 def merge_sort_helper(arr, left, right): # left, right는 idx
-    """
-    머지 정렬 재귀 함수
-    
-    Args:
-        arr: 배열
-        left: 시작 인덱스
-        right: 끝 인덱스
-    """
-    # TODO: base case - left가 right보다 작을 때만 정렬
-
-    ## 중간 지점 계산
-    ## 왼쪽 절반 재귀 정렬
-    ## 오른쪽 절반 재귀 정렬
-    ## 정렬된 두 절반을 병합
-
-
-    mid = (left+right) // 2
-
-    if mid == 0:
+    mid = (left + right) // 2
+    # base case
+    if left >= right:
         return
-    
+        # 재귀 호출
 
-    merge_sort_helper(arr, left, right)
-
+    merge_sort_helper(arr, left, mid)
+    merge_sort_helper(arr, mid+1, right)
     merge(arr, left, mid, right)
+    
 
-
-
-    pass
-
+# 머지 정렬 메인 함수
 def merge_sort(arr):
-    """
-    머지 정렬 메인 함수
-    
-    Args:
-        arr: 정렬할 배열
-    
-    Returns:
-        정렬된 배열
-    """
+
     if len(arr) > 1:
         merge_sort_helper(arr, 0, len(arr) - 1)
     return arr
+
+
 
 # 테스트 케이스
 if __name__ == "__main__":
