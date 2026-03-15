@@ -26,30 +26,37 @@
 전체 조합 찾아서 최대값 찾기
 
 
-[]
-
 
 
 '''
 
-
-arr_size = int(input())
+num = input()
 nums = input()
-nums = nums.split("")
-for i in range(len(nums)):
-    nums[i] = int(nums[i])
+nums = list(map(int, nums.split(" ")))
 
-pairs = []
-sums = []
 
-for i in range(0, len(nums)-1):
-    for j in range(i+1, len(nums)):
-        pairs.append(nums[i] - nums[i+1])
+
+nums.sort(reverse=True)
+print(nums)
+if len(nums) % 2 == 0:
+    for i in range(1, len(nums)//2-1, 2):
+        temp = nums[i]
+        nums[i] = nums[-(i+1)]
+        nums[-(i+1)] = temp
+
+else:
+    for i in range(1, len(nums)//2, 2):
+        temp = nums[i]
+        nums[i] = nums[-(i+1)]
+        nums[-(i+1)] = temp
+
+
+print(nums)
 
 sum = 0
-for x in pairs:
-    sum = sum + x
-
-sums.append(sum)
+for i in range(0, len(nums)-1):
+    sum = sum + abs(nums[i] - nums[i+1])
 
 
+
+print(sum)

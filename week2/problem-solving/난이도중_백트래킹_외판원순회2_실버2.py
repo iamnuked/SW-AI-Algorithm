@@ -2,7 +2,7 @@
 # 문제 링크: https://www.acmicpc.net/problem/10971
 
 '''
-행렬에서 각 x,y요소를 한번씩만 선택
+시작지점은 고정
 
 -> 조합 문제
 경로가 같으면 어느 도시에서 시작하든 거리는 같음
@@ -33,50 +33,29 @@ city_matrix.append(city_matrix4)
 
 print(city_matrix)
 
-selected = []
-
-def select_next(city :list):
-    for i in range(len(city)):
-        for j in range(i):
-
-            if selected[j] == 1:
-                selected.pop()
-
-            if city_matrix[i][j] == 0:
-                selected.pop()
-            selected[j] == 1
 
 
+def tsp():
+    result = []
 
+    def back(start, curr_arr):
+        if len(curr_arr) == 4:
+            result.append(curr_arr.copy)
+            return
+        
 
-
- 
-import sys
-n = int(input())
-
-w = [list(map(int,input().split())) for _ in range(n)]
-sums = [sys.maxsize]
-
-def backtracking(start, visited):
-    if (len(visited) == n):
-        visited.append(visited[0])
-        sum = 0
-        for i in range(len(visited) -1):
-            if (w[visited[i]][visited[i+1]] == 0):
-                visited.pop()
+        for i in range(start, 5):
+            if city_matrix[start][i] == 0:
                 return
-            sum += w[visited[i]][visited[i+1]]
-        if sums[0] > sum:
-            sums[0] = sum
-        visited.pop()
+            curr_arr.append(i)
+            back(i+1, curr_arr)
+            curr_arr.pop()
+
         return
+    
 
-    for i in range(1, n):
-        if i not in visited:
-            visited.append(i)
-            backtracking(visited[len(visited) -1], visited)
-            visited.pop()
+    back(0, [])
+    print(result)
+    return
 
-backtracking(0, [0])
-
-print(sums[0])
+tsp()
