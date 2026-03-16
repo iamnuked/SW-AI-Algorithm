@@ -2,7 +2,7 @@
 # 문제 링크: https://www.acmicpc.net/problem/9933
 
 
-
+# 완
 
 def reverse(pw :str):
     result = ""
@@ -17,7 +17,7 @@ for i in range(rep):
     key = input()
     pw_dict[key] = reverse(key)
 
-
-
-
-print (len(key), key[len(key)//2])
+for key in pw_dict.keys():
+    if key in pw_dict.values():
+        print(len(key), key[len(key)//2])
+        break
