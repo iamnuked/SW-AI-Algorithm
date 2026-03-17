@@ -1,9 +1,12 @@
 # 링크드리스트 - 에디터 (백준 실버2)
 # 문제 링크: https://www.acmicpc.net/problem/1406
 
+# 더미 헤드 하나 추가해야됨
+
+# 시간초과
 
 class node:
-    def __init__(self, ch):
+    def __init__(self, ch=""):
         self.data = ch
         self.next = None
         self.prev = None
@@ -11,8 +14,9 @@ class node:
     
 class linked_list:
     def __init__(self):
-        self.head = None
-        self.curser = None
+        self.dummy_head = node()
+        self.curser = self.dummy_head
+        
 
     # 기존 문자 추가
     def opentxt(self, string):
@@ -36,23 +40,22 @@ class linked_list:
         return
 
 
-    # B 현재 노드 왼쪽 삭제 -> 한칸 왼쪽을 지우는 문제 발생
+    # B 현재 노드 삭제
     def backspace(self):
-        if self.curser == self.head:
+        # 맨 앞인 경우
+        if self.curser == self.dummy_head:
             return
-        elif self.curser.prev == self.head: # 맨 앞 글자 삭제인 경우 head 값 변경해줘야 함
-            self.curser = self.curser.next
-            self.curser.prev = None
-            self.head = self.curser
-
-        elif self.curser.next == None: # 끝 글자 삭제
+        # 끝인 경우
+        elif self.curser.next == None:
             self.curser = self.curser.prev
             self.curser.next = None
-
-        else: # 중간 글자 삭제인 경우
+            return
+        # 중간인 경우
+        else:
             self.curser.prev.next = self.curser.next
             self.curser.next.prev = self.curser.prev
-            pass
+            self.curser = self.curser.prev
+
 
     # P $ $라는 문자 커서 왼쪽에 추가
     def append(self, ch):
@@ -60,49 +63,62 @@ class linked_list:
         new_node = node(ch)
 
         # 빈 상태
-        if self.head == None:
-            self.head = new_node
+        if self.dummy_head.next == None:
+            self.dummy_head.next = new_node
+            new_node.prev = self.dummy_head
             self.curser = new_node
 
         # 끝 커서
         elif self.curser.next == None:
             new_node.prev = self.curser
             self.curser.next = new_node
-            self.curser = self.curser.next
+            self.curser = new_node
 
-        # 앞 커서
-        # elif self.curser.prev == None:
-        #     pass
-            
         else: # 중간 커서
             temp = self.curser.next # 커서 왼쪽 노드
             new_node.prev = self.curser
+            new_node.next = temp
             self.curser.next = new_node
-
             temp.prev = new_node
-            self.curser.next.next = temp # 기존 왼쪽 노드 합치기
-            self.curser = self.curser.next
+            self.curser = new_node
 
 
 
     # 출력
     def print_linked_list(self):
-        velues = ""
-        self.curser = self.head
+        velues = []
+        temp = self.curser
+        self.curser = self.dummy_head
+
         while self.curser != None:
-            velues += self.curser.data
+            velues.append(self.curser.data)
             self.curser = self.curser.next
-        return velues
 
 
-# 테스트 케이스
+        self.curser = temp
+        return print(''.join(velues))
+
+
+
+
+# 입력 값 관련
 ll = linked_list()
-ll.opentxt("abc")
-ll.left_shift()
-# ll.right_shift()
 
-ll.backspace()
-ll.append('1')
-ll.append('2')
-ll.append('3')
-print(ll.print_linked_list())
+file = input()
+ll.opentxt(file)
+
+M = int(input())
+
+for i in range(M):
+    command = input().split()
+    if command[0] == 'L': # 왼쪽으로 이동
+        ll.left_shift()
+    elif command[0] == 'D':
+        ll.right_shift()
+    elif command[0] == 'B':
+        ll.backspace()
+    elif command[0] == 'P':
+        ll.append(command[1])
+
+
+ll.print_linked_list()
