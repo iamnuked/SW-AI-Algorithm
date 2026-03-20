@@ -26,6 +26,14 @@
 - 큐 사용
 """
 
+
+'''
+차수 계산 방법
+나한테 연결된 간선 수로 계산 -> 튜플에서 두번째 값 카운트
+
+
+'''
+
 from collections import deque
 
 def topological_sort(vertices, edges):
@@ -40,20 +48,49 @@ def topological_sort(vertices, edges):
         위상 정렬 순서
     """
     # TODO: 그래프와 진입 차수 초기화
+
+    graph = {}
+    degree = {}
+
     pass
     
     # TODO: 그래프 구성 및 진입 차수 계산
-    pass
+    for i in range(vertices): # 그래프 구성
+        edge = []
+        for x in edges:
+            if x[0] == i:
+                edge.append(x[1])
+        graph[i] = edge
+
+    for i in range(vertices): # 진입 차수 초기화
+        count = 0
+        for edge in edges:
+            if i == edge[1]:
+                count += 1
+        degree[i] = count
     
     # TODO: 진입 차수가 0인 정점들을 큐에 추가
-    pass
-    
     result = []
+    queue = deque()
+
+
+    for v in range(vertices): # 처음에만 차수 0 큐에 삽입해야 함. 안그러면 이미 꺼낸 값 중복으로 들어갈 수 있음
+        if degree[v] == 0:
+            queue.append(v)
+    
+    
     
     # TODO: 큐가 빌 때까지 반복
     ## 큐에서 정점 꺼내기
     ## 인접한 정점들의 진입 차수 감소
-    pass
+    while queue:
+        v = queue.popleft()
+        result.append(v)
+        for i in graph[v]:
+            degree[i] -= 1
+            if degree[i] == 0:
+                queue.append(i)
+
     
     return result
 
