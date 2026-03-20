@@ -32,32 +32,34 @@ BFS: [0, 1, 2, 3]
 
 from collections import deque
 
-def bfs(graph, start):
+def bfs(graph, start, visited=[], queue=deque()):
     """
     너비 우선 탐색
     
     Args:
         graph: 그래프 딕셔너리
-        start: 시작 정점
+        start: 시작 정점 --> 딕셔너리 키
     
     Returns:
         방문 순서 리스트
     """
-    visited = []
     
     # TODO: 큐 생성 및 시작 정점 추가
     ## 방문한 정점 집합
-    queue = deque() # --> bfs에 사용될 큐
-
-    
-
+    #  # --> bfs에 사용될 큐
+    visited.append(start)
     pass
 
     # TODO: 큐가 빌 때까지 반복
     ## 큐에서 정점 꺼내기
     ## 인접한 정점들 확인
     ## 방문하지 않은 정점이면 큐에 추가
-    pass
+    for edge in graph[start]:
+        if edge not in visited and edge not in queue:
+            queue.append(edge)
+    pass 
+    if len(queue) != 0:
+        bfs(graph, queue.popleft(), visited, queue)
     
     return visited
 
