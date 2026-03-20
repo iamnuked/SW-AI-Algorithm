@@ -41,14 +41,37 @@ def create_graph(vertices, edges, directed=False):
         그래프 딕셔너리
     """
     # TODO: 빈 그래프 초기화
+    graph = dict()
     pass
     
     # TODO: 간선 추가
     ## 간선 추가 (u에서 v로)
     ## 무방향 그래프면 반대 방향도 추가
-    pass
-    
-    return graph
+
+    # 딕셔너리에서 노드를 키로하는 리스트를 생성
+    if directed == False:
+        for i in range(vertices):
+            edge_list = []
+            for edge in edges:
+                if i in edge: # edge안에 정점 있으면
+                    a, b = edge # 본인 추가하지 않도록 언패킹 후 본인과 같은 값 제외
+                    if i != a:
+                        edge_list.append(a)
+                    else:
+                        edge_list.append(b)
+            graph[i] = edge_list
+
+        return graph
+
+    elif directed == True: # 방향 그래프
+        for i in range(vertices):
+            edge_list = []
+            for edge in edges:
+                if edge[0] == i:
+                    edge_list.append(edge[1])
+            graph[i] = edge_list
+        
+        return graph
 
 # 테스트 케이스
 if __name__ == "__main__":
