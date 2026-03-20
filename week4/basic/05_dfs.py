@@ -30,7 +30,7 @@ DFS: [0, 1, 2, 3] (순서는 구현에 따라 다를 수 있음)
 - 깊이 우선으로 방문
 """
 
-def dfs(graph, start, visited=None):
+def dfs(graph, start, visited=None, stack=[]):
     """
     깊이 우선 탐색 (재귀)
     
@@ -43,13 +43,18 @@ def dfs(graph, start, visited=None):
         방문 순서 리스트
     """
     # TODO: visited가 None이면 초기화
+    if visited == None:
+        visited = []
     pass
     
     # TODO: 현재 정점 방문
-    pass
+    visited.append(start)
     
     # TODO: 인접한 정점들에 대해 재귀
     ## 방문하지 않은 정점이면 재귀 호출
+    for edge in graph[start]:
+        if edge not in visited:
+            visited = dfs(graph, edge, visited)
     pass
     
     return visited
