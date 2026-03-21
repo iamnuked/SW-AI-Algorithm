@@ -21,49 +21,39 @@ def move_down()
 
 백트래킹으로 상태 저장? -> idx를 저장
 
+stack에 r 저장
+r pop 후 d 저장
 
+
+
+dfs로 접근
 '''
+matrix = []
+N = int(input())
+for _ in range(N):
+    matrix.append(list(map(int, input().split())))
 
-def move_right(idx1, idx2, matrix, N, stack):
-    stack.append((idx1, idx2))
-    if matrix[idx1][idx2] > N - idx1:
-        stack.pop()
+visited = []
+result = ["Hing"]
+
+def dfs(r, c):
+    coord = (r, c)
+    jump = matrix[r][c]
+    if jump == -1:
+        result[0] = "HaruHaru"
+        return 
+    if coord in visited:
         return
-
-    idx1 = idx1 + matrix[idx1][idx2]
-
-    if matrix[idx1][idx2] == -1:
-        return "HaruHaru"
     
-    return idx1, idx2 # 이동한 칸 idx
-
-
-def move_down(idx1, idx2, matrix, N, stack):
-    if matrix[idx1][idx2] > N - idx2:
-        stack.pop()
-        return
-
-    idx2 = idx2 + matrix[idx1][idx2]
-    if matrix[idx1][idx2] == -1:
-        return "HaruHaru"
+    visited.append(coord)
     
-    return idx1, idx2
+    if jump < N - r:
+        dfs(r + jump, c)
 
-
-
-
-
-def jump_jjelly(matrix, N, idx1=0, idx2=0):
-    stack = []
-    stack.append((idx1, idx2))
+    if jump < N - c:
+        dfs(r, c + jump)
     
 
+dfs(0, 0)
 
-    pass
-
-
-
-N = 3
-matrix = [[1, 1, 10], [1, 5, 1], [2, 2, -1]]
-
-print(jump_jjelly(matrix, N))
+print(result[0])  

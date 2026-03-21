@@ -33,6 +33,16 @@ def dfs(graph, start, visited=None):
 
     return visited
 
+# def dfs(graph, start, visited=[]):
+
+# 	visited.append(start)
+	
+# 	for edge in graph[start]:
+# 		if edge not in visited:
+# 			visited = dfs(graph, edge, visited)
+			
+# 	return visited
+
 
 def worm(e, v, edges):
     count = 0
