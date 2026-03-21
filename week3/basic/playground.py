@@ -1,21 +1,36 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        strs = sorted(strs)
-        sorted_str = []
+    def addTwoNumbers(self, l1, l2):
+        text1 = ''
+        text2 = ''
 
-        for str in strs:
-            sorted_str.append(''.join(sorted(str)))
+        list1 = []
+        list2 = []
+        while l1 != None:
+            list1.append(l1.val)
+            l1 = l1.next
 
-        outer_list = []
+        while l2 != None:
+            list2.append(l2.val)
+            l2 = l2.next
 
-        # 딕셔너리 안에 그룹화
-        str_dict = {}
-        for idx, str in enumerate(sorted_str):
-            str_dict.setdefault(str, []).append(strs[idx])
-
-        # 딕셔너리를 리스트로 파싱해서 길이 순으로 정렬
-        result = list(str_dict.values())
-        result.sort(key= len)
-        return result
+        l1 = list1
+        l2 = list2
 
         
+
+        while l1:
+            text1 += str(l1.pop())
+
+        while l2:
+            text2 += str(l2.pop())
+
+        result_rever_text = int(text1) + int(text2) # 정수
+        result = str(result_rever_text)[::-1]
+
+        return list(map(int, result))
