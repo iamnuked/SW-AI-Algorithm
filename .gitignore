@@ -94,3 +94,5 @@ dmypy.json
 *.swo
 *~
 
+# vscode 백준 플러그인 파일
+.cph
