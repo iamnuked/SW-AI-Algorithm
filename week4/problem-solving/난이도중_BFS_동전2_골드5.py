@@ -31,35 +31,35 @@ from collections import deque
 
 ################### 메모리 초과 #########################
 
-# n, k = map(int, input().split()) # n 동전 종류 수, k 타켓
+n, k = map(int, input().split()) # n 동전 종류 수, k 타켓
 
-# cost_list = set()
-# for _ in range(n):
-#     cost_list.add(int(input()))
+cost_list = set()
+for _ in range(n):
+    cost_list.add(int(input()))
 
-# cost_list = list(cost_list)
+cost_list = list(cost_list)
 
-# def bfs(cost_list, target):
-#     q = deque()
-#     q.append([max(cost_list), 0]) # 루트 노드
-#     depth = 0
-#     while q:
-#         depth += 1
-#         q_size = len(q)
-#         for _ in range(q_size):
-#             p_node = q.popleft()
-#             for cost in cost_list:
-#                 if cost <= p_node[0]:
-#                     sum = p_node[1] + cost
-#                     if sum == target:
-#                         return depth
-#                     elif sum < target:
-#                         q.append([cost, sum])
+def bfs(cost_list, target):
+    q = deque()
+    q.append([max(cost_list), 0]) # 루트 노드
+    depth = 0
+    while q:
+        depth += 1
+        q_size = len(q)
+        for _ in range(q_size):
+            p_node = q.popleft()
+            for cost in cost_list:
+                if cost <= p_node[0]:
+                    sum = p_node[1] + cost
+                    if sum == target:
+                        return depth
+                    elif sum < target:
+                        q.append([cost, sum])
 
-#     return -1
+    return -1
 
 
-# print(bfs(cost_list, k))
+print(bfs(cost_list, k))
 
 ########################################################
 
