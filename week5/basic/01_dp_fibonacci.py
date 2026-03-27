@@ -88,19 +88,18 @@ def fibonacci_memo(n, memo=None):
         memo = [None] * (n+2) # n+2로 안할 경우 n 이 0으로 시작될 경우 문제 발생
         memo[0] = 0
         memo[1] = 1
-    pass
-    
+
     # TODO: base case 
 
     
     # TODO: 이미 계산한 값이 memo에 있으면 반환
     if memo[n] != None:
         return memo[n]
-    pass
+
     
     # TODO: 재귀 호출하여 계산하고 memo에 저장
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
-    pass
+
     
     return memo[n]
 
