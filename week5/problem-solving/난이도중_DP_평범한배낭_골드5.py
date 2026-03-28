@@ -12,3 +12,14 @@ for i in range(N):
     w_v_list.append(tuple(map(int, input().split())))
 
 
+dp = [[[0,0]] * (K+1) for i in range(N)]
+
+for i, wv in enumerate(w_v_list):
+    for w in range(K+1):
+        if wv[0] <= w - dp[i][w][0]: # 추가 무게 남은 무게 비교
+            dp[i][w][0] += wv[0] # 무게
+            dp[i][w][1] += wv[1] # 가치
+
+
+print(dp)
+
