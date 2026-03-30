@@ -29,4 +29,3 @@ for _ in range(T):
     print(coin_dp(coins, M))
     
     
-
