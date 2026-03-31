@@ -11,11 +11,9 @@ lcs = [ [0] * (len(str1) + 1) for _ in range(len(str2) + 1) ]
 for y in range(1, len(str2)+1):
     for x in range(1, len(str1)+1):
         if str1[x-1] == str2[y-1]:
-            lcs[y][x] = lcs[y][x-1] + 1
-            break
+            lcs[y][x] = lcs[y-1][x-1] + 1
         else:
-            lcs[y][x] = lcs[y][x-1]
+            lcs[y][x] = max(lcs[y-1][x], lcs[y][x-1])
 
 
-print(lcs)
-    
+print(lcs[-1][-1])
